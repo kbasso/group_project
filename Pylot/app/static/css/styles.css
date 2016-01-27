@@ -1,3 +1,28 @@
 * {
   font-family: monaco;
+
+}
+body{
+
+background-image: url(https://www.colourbox.com/preview/3231187-metal-chain-link-fence-background.jpg);
+
+
+}
+.col-md-5{
+	background-image: url(http://i.istockimg.com/file_thumbview_approve/1658683/5/stock-photo-1658683-red-dripping-blood-on-white-background.jpg);
+	background-size: cover;
+	border-radius: 15px;
+	box-shadow: 10px;
+	margin: 20px;
+	box-shadow: 15px 15px 25px #777777;
+}
+header{
+	color:white;
+	background-image: url(http://www.wallpaper4me.com/images/wallpapers/blooddiamondsteel-886370.jpeg);
+	background-size: 1900px 530px;
+    background-repeat: no-repeat;
+}
+
+a:hover { 
+    background-color: red;
 }
