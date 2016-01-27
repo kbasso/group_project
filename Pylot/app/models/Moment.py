@@ -1,4 +1,5 @@
 from system.core.model import Model
+from flask import session
 
 class Moment(Model):
     def __init__(self):
@@ -15,7 +16,7 @@ class Moment(Model):
 		return self.db.query_db(query)
 
     def create(self, info):
-        query_moments = 'INSERT INTO moments (url, beg, end, categories_id, created_at) VALUES (%s, %s, %s, SELECT id FROM categories WHERE name = %s, NOW()) '
+        query_moments = 'INSERT INTO moments (url, beg, end, categories_id, created_at) VALUES (%s, %s, %s, (SELECT id FROM categories WHERE name = %s), NOW()) '
         data_moments = [info['url'], info['beg'], info['end'], info['category']]
         self.db.query_db(query_moments, data_moments)
 
@@ -23,7 +24,9 @@ class Moment(Model):
         data_mID = [info['url'], info['beg'], info['end']]
         moment_id = self.db.query_db(query_mID, data_mID)
 
+        print moment_id[0]
+
         query_plalist = 'INSERT INTO playlist (moments_id, users_id) VALUES (%s, %s)'
-        data_playlist = [moment_id, session['userID']]
+        data_playlist = [moment_id[0]['id'], session['userID']]
         
         return self.db.query_db(query_plalist, data_playlist)

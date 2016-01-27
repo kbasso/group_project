@@ -1,4 +1,5 @@
 from system.core.controller import *
+from flask import session
 
 class Moments(Controller):
     def __init__(self, action):
