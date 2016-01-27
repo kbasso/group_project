@@ -16,7 +16,7 @@ from system.core.router import routes
     named id the automatically generated url would be '/products/add/<id>'
     The automatically generated routes respond to all of the http verbs (GET, POST, PUT, PATCH, DELETE)
 """
-routes['default_controller'] = 'Moments'
+routes['default_controller'] = 'Welcome'
 routes['POST']['/moments/add'] = 'Moments#add'
 routes['POST']['/moments/category'] = 'Moments#category'
 """
