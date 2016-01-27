@@ -13,8 +13,17 @@ class Moment(Model):
     def get_cats(self):
 		query = 'SELECT * FROM categories'
 		return self.db.query_db(query)
-     def create(self, info):
-        query_moments = 'INSERT INTO moments (url, beg, end, categories_id, created_at) VALUES  '
-        data = 
-        query_plalist = 'INSERT INTO playlist (moments_id, users_id) VALUES ()'
-        data_playlist = 
+
+    def create(self, info):
+        query_moments = 'INSERT INTO moments (url, beg, end, categories_id, created_at) VALUES (%s, %s, %s, SELECT id FROM categories WHERE name = %s, NOW()) '
+        data_moments = [info['url'], info['beg'], info['end'], info['category']]
+        self.db.query_db(query_moments, data_moments)
+
+        query_mID = 'SELECT id FROM moments WHERE url = %s and beg=%s and end = %s'
+        data_mID = [info['url'], info['beg'], info['end']]
+        moment_id = self.db.query_db(query_mID, data_mID)
+
+        query_plalist = 'INSERT INTO playlist (moments_id, users_id) VALUES (%s, %s)'
+        data_playlist = [moment_id, session['userID']]
+        
+        return self.db.query_db(query_plalist, data_playlist)

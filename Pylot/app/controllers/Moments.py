@@ -7,13 +7,16 @@ class Moments(Controller):
 
     def index(self):
         cats = self.models['Moment'].get_cats()
+        if 'userID' not in session:
+            session['userID'] = 1
+        
         return self.load_view('index.html', cats = cats)
 
     def add(self):
         data = {
             'category':     request.form['category'],
-            'beginning':    request.form['beg'],
-            'ending':       request.form['end'],
+            'beg':    request.form['beg'],
+            'end':       request.form['end'],
             'url':          request.form['url']
         }
         self.models['Moment'].create(data)
