@@ -24,9 +24,14 @@ class Moment(Model):
         data_mID = [info['url'], info['beg'], info['end']]
         moment_id = self.db.query_db(query_mID, data_mID)
 
-        print moment_id[0]
-
         query_plalist = 'INSERT INTO playlist (moments_id, users_id) VALUES (%s, %s)'
         data_playlist = [moment_id[0]['id'], session['userID']]
         
         return self.db.query_db(query_plalist, data_playlist)
+
+    def get_by_cat(self, cat):
+        query = 'SELECT *  FROM moments WHERE id in  (SELECT moments_id FROM playlist WHERE users_id = %s and moments_id in (SELECT id FROM moments WHERE categories_id = %s))'
+        data = [session['userID'], cat]
+
+
+        return self.db.query_db(query, data)

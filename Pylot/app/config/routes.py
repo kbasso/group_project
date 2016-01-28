@@ -19,6 +19,7 @@ from system.core.router import routes
 routes['default_controller'] = 'Moments'
 routes['POST']['/moments/add'] = 'Moments#add'
 routes['POST']['/moments/category'] = 'Moments#category'
+routes ['POST']['/category'] = 'Moments#cat'
 """
     You can add routes and specify their handlers as follows:
 
