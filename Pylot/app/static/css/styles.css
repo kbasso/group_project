@@ -14,15 +14,35 @@ background-image: url(https://www.colourbox.com/preview/3231187-metal-chain-link
 	border-radius: 15px;
 	box-shadow: 10px;
 	margin: 20px;
-	box-shadow: 15px 15px 25px #777777;
+	box-shadow: 15px 15px 25px #c11717;
+	font-weight: bold;
 }
 header{
+	text-shadow: 8px 8px 8px #c11717;
 	color:white;
-	background-image: url(http://www.wallpaper4me.com/images/wallpapers/blooddiamondsteel-886370.jpeg);
-	background-size: 1900px 530px;
-    background-repeat: no-repeat;
+	background-image: url(https://d2gg9evh47fn9z.cloudfront.net/thumb_COLOURBOX9620966.jpg);
+    background-repeat: repeat;
+    border-radius: 70px;
+    display: inline;
 }
 
-a:hover { 
-    background-color: red;
+a:link{
+	color:red;
+	text-decoration: none;
+}
+a:visited{
+	color: green;
+
+}
+a:hover{
+	background-color: green;
+	text-decoration: underline;
+	font-weight: bold;
+}
+a:active{
+	background-color: red;
+}
+img:hover{
+	box-shadow: 15px 15px 25px #c11717;
+
 }
