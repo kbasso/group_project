@@ -1,0 +1,48 @@
+* {
+  font-family: monaco;
+
+}
+body{
+
+background-image: url(https://www.colourbox.com/preview/3231187-metal-chain-link-fence-background.jpg);
+
+
+}
+.col-md-5{
+	background-image: url(http://i.istockimg.com/file_thumbview_approve/1658683/5/stock-photo-1658683-red-dripping-blood-on-white-background.jpg);
+	background-size: cover;
+	border-radius: 15px;
+	box-shadow: 10px;
+	margin: 20px;
+	box-shadow: 15px 15px 25px #c11717;
+	font-weight: bold;
+}
+header{
+	text-shadow: 8px 8px 8px #c11717;
+	color:white;
+	background-image: url(https://d2gg9evh47fn9z.cloudfront.net/thumb_COLOURBOX9620966.jpg);
+    background-repeat: repeat;
+    border-radius: 70px;
+    display: inline;
+}
+
+a:link{
+	color:red;
+	text-decoration: none;
+}
+a:visited{
+	color: green;
+
+}
+a:hover{
+	background-color: green;
+	text-decoration: underline;
+	font-weight: bold;
+}
+a:active{
+	background-color: red;
+}
+img:hover{
+	box-shadow: 15px 15px 25px #c11717;
+
+}

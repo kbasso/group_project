@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+	<title>Videos by cats</title>
+
+
+
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,9 +40,8 @@
     <![endif]-->
 
 </head>
-
 <body>
-  <header class="header">
+ <header class="header">
      <h3><strong>"Edit, breakdown and show highlights to any youtube video!"</strong></h3>
      <nav class="navbar navbar-inverse">
        <div class="container-fluid">
@@ -69,13 +71,13 @@
                         <h1>Categories</h1>
                     </a>
                 </li>
-             {%for cat in cats%}
-                 <li class="">
-                    <a href="#">
-                        {{ cat['name'] }}
-                    </a>
-                </li>
-             {%endfor%}
+		             {%for cat in cats%}
+	                 <li class="">
+		                    <a href='/category/{{cat['id']}}'>
+			                    {{ cat['name'] }}
+		                    </a>
+	                </li>
+		             {%endfor%}
                 <li>
                   <form action="/moments/add" method='get'>
 		                <input type="submit" class="btn btn-danger" value='Create new moment'>
@@ -90,32 +92,16 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Moments Page</h1>
+                        <div id='player'></div>
 
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Categories</a>
-                    </div>
+                        	<div id='container' style='margin: auto;'> 
+								{%for item in list%}
+									<iframe src={{item}} allowfullscreen="1" ></iframe>
+								{%endfor%}
+							</div>
+	                    </div>
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
 </body>
-
 </html>

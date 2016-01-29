@@ -1,4 +1,6 @@
 from system.core.controller import *
+from flask import session
+import math
 
 class Moments(Controller):
     def __init__(self, action):
@@ -7,16 +9,24 @@ class Moments(Controller):
 
     def index(self):
         cats = self.models['Moment'].get_cats()
-        return self.load_view('index.html', cats = cats)
+        # if 'userID' not in session:
+        #     session['userID'] = 2
+        return self.load_view('success.html', cats = cats)
 
     def add(self):
+        beg = request.form['beg']
+        print beg
+        begInt = int(float(beg))
+
+        print type(begInt)
+
         data = {
             'category':     request.form['category'],
-            'beginning':    request.form['beg'],
-            'ending':       request.form['end'],
+            'beg':          int(float(request.form['beg'])),
+            'end':          int(float(request.form['end'])),
             'url':          request.form['url']
         }
-        self.models['Moment'].create(data)
+        test = self.models['Moment'].create(data)
         return jsonify(test=test)
 
     def category(self):
@@ -24,6 +34,19 @@ class Moments(Controller):
         self.models['Moment'].cat(data)
         return jsonify(category = data)
 
-    # def get_cat(self):
-    #     cats = self.models['Momemt'].get_cats()
-    #     return jsonify(cats=cats)
+    # def select_by_cat(self):
+    #     cat = self.models['Moment'].by_user()
+        
+    #     return self.load_view
+
+    def cat(self, id):
+        print id
+        cats = self.models['Moment'].get_cats()
+        # catId = request.form['cat']
+        # print catId
+        list = self.models['Moment'].get_by_cat(id)
+        listURLs = []
+        for item in list:
+            listURLs.append('https://www.youtube.com/embed/' + item['url'] + '?start=' + item['beg'] + '&end=' + item['end'] )
+            print listURLs
+        return self.load_view('cat.html', list = listURLs, cats = cats)

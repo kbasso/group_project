@@ -4,6 +4,7 @@ class Users(Controller):
     def __init__(self, action):
         super(Users, self).__init__(action)
         self.load_model('User')
+        self.load_model('Moment')
 
     def index(self):
 
@@ -23,6 +24,7 @@ class Users(Controller):
 
         if create_status['status'] == True:
             session['id'] = create_status['user']['id']
+            session['name'] = create_status['user']['first_name']
             return redirect('/success')
         else:
             for message in create_status['errors']:
@@ -42,8 +44,14 @@ class Users(Controller):
                 flash(message, 'Login_errors')
             return redirect('/')
         else:
+            session['id'] = status['user']['id']
             session['name'] = status['user']['first_name']
             return redirect('/success')
 
     def success(self):
-        return self.load_view('success.html')
+        cats = self.models['Moment'].get_cats()
+        return self.load_view('moments.html', cats = cats)
+
+    def logout(self):
+        session.clear()
+        return redirect('/')
