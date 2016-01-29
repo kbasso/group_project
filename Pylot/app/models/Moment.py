@@ -35,3 +35,5 @@ class Moment(Model):
 
 
         return self.db.query_db(query, data)
+
+    # def get_id_by_name(self, name):

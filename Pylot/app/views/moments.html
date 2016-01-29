@@ -71,7 +71,7 @@
                 </li>
              {%for cat in cats%}
                  <li class="">
-                    <a href="#">
+                    <a href='/category/{{cat['id']}}'>
                         {{ cat['name'] }}
                     </a>
                 </li>
@@ -80,6 +80,14 @@
                   <form action="/moments/add" method='get'>
 		                <input type="submit" class="btn btn-danger" value='Create new moment'>
 	                 </form>
+                </li>
+                <br>
+                <br>
+                <li>
+                  <form action="/moments/category" method='post'>
+                        <input type='text' name='category'>
+                        <p><input type="submit" class="btn btn-danger" value='Create new category'></p>
+                     </form>
                 </li>
             </ul>
         </div>

@@ -9,8 +9,6 @@ class Moments(Controller):
 
     def index(self):
         cats = self.models['Moment'].get_cats()
-        # if 'userID' not in session:
-        #     session['userID'] = 2
         return self.load_view('success.html', cats = cats)
 
     def add(self):
@@ -32,15 +30,9 @@ class Moments(Controller):
     def category(self):
         data = {'category': request.form['category']}
         self.models['Moment'].cat(data)
-        return jsonify(category = data)
-
-    # def select_by_cat(self):
-    #     cat = self.models['Moment'].by_user()
-        
-    #     return self.load_view
+        return redirect('/moments/add')
 
     def cat(self, id):
-        print id
         cats = self.models['Moment'].get_cats()
         # catId = request.form['cat']
         # print catId
