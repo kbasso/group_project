@@ -9,10 +9,9 @@ class Moments(Controller):
 
     def index(self):
         cats = self.models['Moment'].get_cats()
-        if 'userID' not in session:
-            session['userID'] = 2
-        
-        return self.load_view('create.html', cats = cats)
+        # if 'userID' not in session:
+        #     session['userID'] = 2
+        return self.load_view('success.html', cats = cats)
 
     def add(self):
         beg = request.form['beg']
@@ -40,13 +39,14 @@ class Moments(Controller):
         
     #     return self.load_view
 
-    def cat(self):
-
-        catId = request.form['cat']
+    def cat(self, id):
+        print id
+        cats = self.models['Moment'].get_cats()
+        # catId = request.form['cat']
         # print catId
-        list = self.models['Moment'].get_by_cat(catId)
+        list = self.models['Moment'].get_by_cat(id)
         listURLs = []
         for item in list:
             listURLs.append('https://www.youtube.com/embed/' + item['url'] + '?start=' + item['beg'] + '&end=' + item['end'] )
             print listURLs
-        return self.load_view('cat.html', list = listURLs)
+        return self.load_view('cat.html', list = listURLs, cats = cats)

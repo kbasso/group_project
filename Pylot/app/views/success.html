@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-  // <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,23 +12,30 @@
     <title>Chop/Clip</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link type='text/css' href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="static/css/simple-sidebar.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" > -->
-    <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
-    <!-- // <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+    <link type='text/css' href="{{ url_for('static', filename='css/simple-sidebar.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
    <!-- Optional theme -->
-   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
    <!-- Latest compiled and minified JavaScript -->
-   <!-- // <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
    <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+     <script>
 
 
 
@@ -108,12 +116,11 @@
     })
 
   </script>
+
 </head>
 
-<html>
-  <body>
-
-      <header class="header">
+<body>
+  <header class="header">
      <h3><strong>"Edit, breakdown and show highlights to any youtube video!"</strong></h3>
      <nav class="navbar navbar-inverse">
        <div class="container-fluid">
@@ -133,7 +140,7 @@
 
    </header>
 
-       <div id="wrapper">
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -145,51 +152,74 @@
                 </li>
              {%for cat in cats%}
                  <li class="">
-                    <a href='/category/{{cat['name'] }}' method='get'>
+                    <a href='/category/{{cat['id']}}'>
                         {{ cat['name'] }}
                     </a>
                 </li>
              {%endfor%}
                 <li>
                   <form action="/moments/add" method='get'>
-                    <input type="submit" class="btn btn-danger" value='Create new moment'>
-                   </form>
+		                <input type="submit" class="btn btn-danger" value='Create new moment'>
+	                 </form>
                 </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <!-- Page Content -->
-                        <!-- /#page-content-wrapper -->
-                    <form id='category'>
-                      <label>Add new category:</label>
-                      <input name='category'>
-                      <input type='submit' value='Submit'>
-                    </form>
+                        <div id='player'></div>
 
-                       <form>
-                      <a href='' id='takeTime'>take time</a>
-                    </form>
+                        	<div id='container' style='margin: auto;'> 
+                        		<div>
+									<a id="takeTime">Take time</a>
+                        		</div>
+                        		
 
+							      <form id='toServer'>
+							      <input type='hidden' name='url' id='passURL'>
+							      <label>Category</label>
+							      <select name='category'>
+							        {%for cat in cats%}
+							          <option value={{ cat['name'] }}>{{ cat['name'] }}</option>
+							        {%endfor%}
+							      </select>
+
+							      <label>Beginning time:</label>
+							      <input type='text' id='beg' name='beg'>
+							      <label>Ending time:</label>
+							      <input type='text' id='end' name='end'>
+							      <input type='submit' value='Submit'>
+							    </form>
+
+							      <div>
+							        <form action='/category' method='post'>
+							        <label>Go to category:</label>
+							        <select name='cat'>
+							          {%for cat in cats%}
+							            <option value={{ cat['id'] }}>{{ cat['name'] }}</option>
+							        {%endfor%}
+							        </select>
+							          <input type='submit' value='Go'>
+							      </form>
+							      </div>  
+
+</div>
+
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Categories</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- /#page-content-wrapper -->
 
     </div>
+    <!-- /#wrapper -->
 
-    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-
-    
-
- 
-
-      <!-- <a href='' id='goto'>Go to 50</a> -->
-
-    <script>
+       <script>
 
       
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -232,39 +262,20 @@
 
     </script>
 
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
-<div id='container' style='margin: auto;'> 
-      <form id='toServer'>
-      <input type='hidden' name='url' id='passURL'>
-      <label>Category</label>
-      <select name='category'>
-        {%for cat in cats%}
-          <option value={{ cat['name'] }}>{{ cat['name'] }}</option>
-        {%endfor%}
-      </select>
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 
-      <label>Beginning time:</label>
-      <input type='text' id='beg' name='beg'>
-      <label>Ending time:</label>
-      <input type='text' id='end' name='end'>
-      <input type='submit' value='Submit'>
-    </form>
+</body>
 
-      <div>
-        <form action='/category' method='post'>
-        <label>Go to category:</label>
-        <select name='cat'>
-          {%for cat in cats%}
-            <option value={{ cat['id'] }}>{{ cat['name'] }}</option>
-        {%endfor%}
-        </select>
-          <input type='submit' value='Go'>
-      </form>
-      </div>  
-
-</div>
-
-
-        </body>
-    </html>
+</html>
