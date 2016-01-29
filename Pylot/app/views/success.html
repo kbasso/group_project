@@ -165,7 +165,7 @@
                 </li>
              {%endfor%}
                 <li>
-                  <form action="/moments/add" method='get'>
+                  <form action="/moments/add" method='post'>
 		                <input type="submit" class="btn btn-danger" value='Create new moment'>
 	                 </form>
                 </li>
@@ -203,15 +203,15 @@
 							    </form>
 
 							      <div>
-							        <form action='/category' method='post'>
-							        <label>Go to category:</label>
+							        <!-- <form action='/category' method='post'> -->
+	<!-- 						        <label>Go to category:</label>
 							        <select name='cat'>
 							          {%for cat in cats%}
 							            <option value={{ cat['id'] }}>{{ cat['name'] }}</option>
 							        {%endfor%}
 							        </select>
 							          <input type='submit' value='Go'>
-							      </form>
+							      </form> -->
 							      </div>  
 
 </div>
@@ -243,7 +243,7 @@
         player = new YT.Player('player', {
           height: '390',
           width: '640',
-         videoId: 'UYeWCGYSfyw',
+         videoId: '1waNpmtYSIM',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
